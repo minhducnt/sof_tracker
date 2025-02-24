@@ -17,8 +17,7 @@ To run the app, clone the repository and follow the setup instructions. Once set
 To set up the project, run the following command to activate the project:
 
 ```bash
-git clone https://github.com/minhducnt/TMA_Assignment.git
-./run_gen_files.sh
+git clone https://github.com/minhducnt/sof_tracker_ios.git
 ```
 
 Once the project is activated, run the following command with Terminal to initialise the project:
