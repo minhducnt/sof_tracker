@@ -6,9 +6,11 @@ import SwiftUI
 struct SettingsScreen: View {
     // MARK: - Attributes
 
-    @State var presentEditInfoScreen = false
-    @StateObject var viewModel: SettingsViewModel = .init()
     @Environment(\.dismiss) var dismiss
+    
+    @StateObject var viewModel: SettingsViewModel = .init()
+    
+    @State var presentEditInfoScreen = false
     @State private var selectedMode = Preferences.appearanceMode
 
     // MARK: - Views
@@ -16,19 +18,37 @@ struct SettingsScreen: View {
     var body: some View {
         ZStack {
             VStack(spacing: 30) {
-                Header(text: AppStrings.Settings, hasBackButton: true, onBackArrowClick: { dismiss() })
+                // MARK: - Header
+
+                Header(
+                    text: AppStrings.Settings,
+                    hasBackButton: true,
+                    onBackArrowClick: {
+                        dismiss()
+                    }
+                )
+                
+                // MARK: - User Details
          
                 userDetailsView
                 
+                // MARK: - Update Btn
+
                 updateButtonView
                 
+                // MARK: - Appearance Selection
+
                 AppearanceSelectionView(selectedMode: $selectedMode)
                     .padding(.top, 20)
                 
+                // MARK: - Bottom Btn
+
                 bottomButtons
                 
             }.padding()
             
+            // MARK: - Bottom Sheet
+
             if viewModel.currentBottomSheetType != nil {
                 bottomSheet
             }
@@ -39,6 +59,8 @@ struct SettingsScreen: View {
             AnalyticsManager.logScreenView(screenName: String(describing: Self.self))
         }
     }
+    
+    // MARK: - User Detail View
     
     var userDetailsView: some View {
         VStack(spacing: 20) {
@@ -56,51 +78,84 @@ struct SettingsScreen: View {
         }
     }
     
+    // MARK: - Update Btn View
+    
     var updateButtonView: some View {
-        TextButton(onClick: {
-            AnalyticsManager.logButtonClickEvent(buttonType: .primary, label: "Update")
-            presentEditInfoScreen = true
-        }, text: AppStrings.Update)
-            .fullScreenCover(isPresented: $presentEditInfoScreen, onDismiss: {
+        TextButton(
+            onClick: {
+                AnalyticsManager.logButtonClickEvent(buttonType: .primary, label: "Update")
+                presentEditInfoScreen = true
+            },
+            text: AppStrings.Update
+        )
+        .fullScreenCover(
+            isPresented: $presentEditInfoScreen,
+            onDismiss: {
                 viewModel.setUp()
-            }, content: {
+            },
+            content: {
                 EditUserDetailsScreen()
-            })
+            }
+        )
     }
+    
+    // MARK: - Bottom Btn View
     
     var bottomButtons: some View {
         VStack {
             Spacer()
             HStack {
-                TextButton(onClick: {
-                    AnalyticsManager.logButtonClickEvent(buttonType: .secondary, label: "Logout")
-                    viewModel.currentBottomSheetType = .logout
-                }, text: AppStrings.Logout, style: .outline, color: .orange)
-                TextButton(onClick: {
-                    AnalyticsManager.logButtonClickEvent(buttonType: .secondary, label: "Delete Account")
-                    viewModel.currentBottomSheetType = .delete
-                }, text: AppStrings.DeleteAccount, style: .outline, color: .red)
+                TextButton(
+                    onClick: {
+                        AnalyticsManager.logButtonClickEvent(buttonType: .secondary, label: "Logout")
+                        viewModel.currentBottomSheetType = .logout
+                    },
+                    text: AppStrings.Logout,
+                    style: .outline,
+                    color: .orange
+                )
+                TextButton(
+                    onClick: {
+                        AnalyticsManager.logButtonClickEvent(buttonType: .secondary, label: "Delete Account")
+                        viewModel.currentBottomSheetType = .delete
+                    },
+                    text: AppStrings.DeleteAccount,
+                    style: .outline,
+                    color: .red
+                )
             }
         }
     }
     
+    // MARK: - Bottom Sheet View
+
     var bottomSheet: some View {
         @State var isOpen = Binding<Bool>(
             get: { viewModel.currentBottomSheetType != nil },
             set: { if !$0 { viewModel.currentBottomSheetType = nil } }
         )
         
-        return CustomBottomSheetView(isOpen: isOpen, maxHeight: viewModel.currentBottomSheetType!.sheetSize, content: {
-            if viewModel.currentBottomSheetType != nil {
-                ConfirmationSheet(isConfirmationGiven: $viewModel.isConfirmationGiven, isOpen: isOpen, title: viewModel.currentBottomSheetType!.title, subTitle: viewModel.currentBottomSheetType!.subTitle)
+        return CustomBottomSheetView(
+            isOpen: isOpen,
+            maxHeight: viewModel.currentBottomSheetType!.sheetSize,
+            content: {
+                if viewModel.currentBottomSheetType != nil {
+                    ConfirmationSheet(
+                        isConfirmationGiven: $viewModel.isConfirmationGiven,
+                        isOpen: isOpen,
+                        title: viewModel.currentBottomSheetType!.title,
+                        subTitle: viewModel.currentBottomSheetType!.subTitle
+                    )
+                }
             }
-        })
+        )
     }
 }
 
 struct TitleValueView: View {
     let title: LocalizedStringKey
     let value: String
+    
     var body: some View {
         HStack {
             Text(title)

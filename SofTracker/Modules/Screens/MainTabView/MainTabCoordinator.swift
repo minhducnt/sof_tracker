@@ -4,19 +4,18 @@
 import SwiftUI
 
 struct MainTabCoordinator: View {
+    // MARK: - Properties
+    
     @StateObject var viewModel: MainTabViewModel = .init()
     @State var presentSideMenu: Bool = false
     var edgeTransition: AnyTransition = .move(edge: .leading)
     
+    // MARK: - Body
+
     var body: some View {
         ZStack(alignment: .top) {
-            VStack {
-                // MARK: - Top Side Menu
-
+            VStack(spacing: 0) {
                 topSideMenu
-                
-                // MARK: - Tab View
-
                 tabView
             }
             
@@ -37,14 +36,14 @@ struct MainTabCoordinator: View {
                 Tab1Screen().tabItem {
                     TabItem(
                         title: "Home",
-                        icon: viewModel.selectedTab == .tab1 ? "house.fill" : "house"
+                        icon: "house"
                     )
                 }.tag(Tab.tab1)
                 
                 Tab2Screen().tabItem {
                     TabItem(
                         title: "Profile",
-                        icon: viewModel.selectedTab == .tab2 ? "person.fill" : "person"
+                        icon: "person"
                     )
                 }.tag(Tab.tab2)
             }
@@ -79,9 +78,9 @@ struct MainTabCoordinator: View {
             } label: {
                 Image(systemName: "line.3.horizontal")
                     .resizable()
-                    .frame(width: 24, height: 24)
+                    .frame(width: 22, height: 22)
             }
-            .foregroundColor(.primarySof)
+            .foregroundColor(.white)
             .padding()
             
             Spacer()
@@ -91,6 +90,7 @@ struct MainTabCoordinator: View {
                 .scaledToFit()
                 .frame(width: 60)
         }
+        .background(Color.primarySof)
     }
 }
 

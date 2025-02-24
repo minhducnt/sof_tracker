@@ -21,6 +21,6 @@ struct TabItem: View {
     }
 }
 
-#Preview {
+#Preview(traits: .sizeThatFitsLayout) {
     TabItem(title: "Home", icon: "house.circle.fill")
 }

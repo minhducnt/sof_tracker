@@ -8,7 +8,7 @@ enum AppearanceMode: String {
     case light, dark
 }
 
-struct Preferences {
+enum Preferences {
     static var appearanceMode: AppearanceMode {
         get {
             let storedValue = UserPreferences.shared.selectedAppearance
@@ -23,7 +23,7 @@ struct Preferences {
     static func applyAppearance(_ mode: AppearanceMode) {
         DispatchQueue.main.async {
             if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
-                windowScene.windows.forEach { window in
+                for window in windowScene.windows {
                     switch mode {
                     case .light:
                         window.overrideUserInterfaceStyle = .light

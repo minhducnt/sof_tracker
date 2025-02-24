@@ -4,9 +4,17 @@
 import SwiftUI
 
 struct WeatherScreen: View {
+    // MARK: - Properties
+
     @State var isInfoScreenPresented = false
     @StateObject var viewModel: WeatherViewModel = .init()
     
+    // MARK: - Body
+    
+    init() {
+        getWeatherData()
+    }
+
     var body: some View {
         VStack {
             ScrollView(showsIndicators: false) {
@@ -15,7 +23,9 @@ struct WeatherScreen: View {
                         ForEach(viewModel.weatherData, id: \.self) { data in
                             CardView(
                                 title: getLocalString(data.name),
-                                subTitle: makeDescription(weatherItem: data)
+                                subTitle: makeDescription(weatherItem: data),
+                                conditionImage: viewModel.conditionImage(conditionId: data.id),
+                                conditionColor: viewModel.conditionColor(conditionId: data.id)
                             )
                             .onTapGesture {
                                 viewModel.selectedCardIndex = viewModel.weatherData.firstIndex(of: data)!
@@ -46,7 +56,6 @@ struct WeatherScreen: View {
         .frame(maxWidth: .infinity)
         .loader(viewModel.isDataLoading)
         .onAppear {
-            getWeatherData()
             AnalyticsManager.logScreenView(screenName: String(describing: Self.self))
         }
     }

@@ -4,6 +4,8 @@
 import SwiftUI
 
 struct EditUserDetailsScreen: View {
+    // MARK: - Properties
+    
     @State private var name: String = ""
     @State private var email: String = ""
     @State private var selectedGender: Gender = .male
@@ -15,6 +17,8 @@ struct EditUserDetailsScreen: View {
     @State private var showConfirmation: Bool = false
     @State private var isConfirmationGiven: Bool = false
     
+    // MARK: - Body
+
     var body: some View {
         ZStack {
             VStack {

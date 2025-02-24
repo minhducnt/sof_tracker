@@ -37,24 +37,28 @@ struct WebView: UIViewRepresentable {
         }
 
         func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-            // Finished loading
+            // MARK: - Finished loading
+
             parent.isLoading = false
         }
 
         func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-            // Failed to load
+            // MARK: - Failed to load
+
             parent.isLoading = false
             parent.showError = true
         }
 
         func webView(_ webView: WKWebView, didFailProvisionalLoadWithError error: Error) {
-            // Failed to load
+            // MARK: - Failed to load
+
             parent.isLoading = false
             parent.showError = true
         }
 
         func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-            // Failed to load
+            // MARK: - Failed to load
+
             parent.isLoading = false
             parent.showError = true
         }

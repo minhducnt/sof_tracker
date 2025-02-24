@@ -5,13 +5,10 @@ import SwiftUI
 
 struct Tab2Screen: View {
     var body: some View {
-        VStack {
-            Text(AppStrings.Tab) + Text("2")
-            ProfileScreen()
-        }
-        .onAppear {
-            AnalyticsManager.logScreenView(screenName: String(describing: Self.self))
-        }
+        ProfileScreen()
+            .onAppear {
+                AnalyticsManager.logScreenView(screenName: String(describing: Self.self))
+            }
     }
 }
 

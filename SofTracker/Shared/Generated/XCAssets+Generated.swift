@@ -37,6 +37,13 @@ internal enum Asset {
       internal static let sofSplashBg1 = ImageAsset(name: "sof_splash_bg_1")
       internal static let sofSplashBg2 = ImageAsset(name: "sof_splash_bg_2")
     }
+    internal enum SVGs {
+      internal static let backgroundPattern = ImageAsset(name: "background_pattern")
+      internal static let vectorCurved1 = ImageAsset(name: "vectorCurved1")
+      internal static let vectorCurved2 = ImageAsset(name: "vectorCurved2")
+      internal static let vectorCurved3 = ImageAsset(name: "vectorCurved3")
+      internal static let vectorCurved4 = ImageAsset(name: "vectorCurved4")
+    }
   }
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name

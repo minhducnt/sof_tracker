@@ -7,6 +7,9 @@ struct SplashScreen: View {
     // MARK: - Properties
 
     @State private var isVisible: Bool = false
+    
+    let screenWidth = UIScreen.main.bounds.width
+    let screenHeight = UIScreen.main.bounds.height
 
     // MARK: - Body
 
@@ -33,9 +36,6 @@ struct SplashScreen: View {
             .padding()
 
             // MARK: Background Images
-
-            let screenWidth = UIScreen.main.bounds.width
-            let screenHeight = UIScreen.main.bounds.height
 
             Image(.sofSplashBg1)
                 .resizable()

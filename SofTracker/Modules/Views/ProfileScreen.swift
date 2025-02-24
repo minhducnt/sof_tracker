@@ -4,31 +4,23 @@
 import SwiftUI
 
 struct ProfileScreen: View {
-    @State var presentSettingsPage = false
+    // MARK: - Properties
+
     @State private var userName: String = ""
     @State private var userEmail: String = ""
+
+    // MARK: - Body
 
     var body: some View {
         NavigationView {
             VStack {
-                UserInfoView(name: $userName, email: $userEmail)
-                HStack {
-                    Image(systemName: "gearshape")
-                        .resizable()
-                        .frame(width: 20, height: 20)
-                    Text(AppStrings.Settings)
-                        .font(.notoSansRegular16)
-                }
-                .onTapGesture {
-                    AnalyticsManager.logButtonClickEvent(buttonType: .secondary, label: "Settings")
-                    presentSettingsPage = true
-                }
-                .fullScreenCover(isPresented: $presentSettingsPage, onDismiss: {
-                    updateUserInfo()
-                }, content: {
-                    SettingsScreen()
-                })
-                .foregroundColor(.secondarySof)
+                Spacer()
+
+                UserInfoView(
+                    name: $userName,
+                    email: $userEmail
+                )
+
                 Spacer()
             }.padding(.horizontal, 25)
         }
@@ -38,12 +30,14 @@ struct ProfileScreen: View {
         }
     }
 
+    // MARK: - Functions
+
     func updateUserInfo() {
         userName = UserPreferences.shared.getUser()?.name ?? ""
         userEmail = UserPreferences.shared.getUser()?.email ?? ""
     }
 }
 
-#Preview {
+#Preview(traits: .sizeThatFitsLayout) {
     ProfileScreen()
 }

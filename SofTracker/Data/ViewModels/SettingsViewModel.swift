@@ -5,6 +5,8 @@ import Foundation
 import SwiftUI
 
 class SettingsViewModel: ObservableObject {
+    // MARK: - Properties
+
     enum BottomSheet {
         case logout
         case delete
@@ -53,6 +55,8 @@ class SettingsViewModel: ObservableObject {
 
     @Published var currentBottomSheetType: BottomSheet?
     
+    // MARK: - Functions
+
     func handleConfirmation() {
         switch currentBottomSheetType {
         case .logout:
@@ -88,6 +92,7 @@ class SettingsViewModel: ObservableObject {
     
     func setUp() {
         let user = UserPreferences.shared.getUser()
+        
         userName = user?.name ?? ""
         userEmail = user?.email ?? ""
         gender = user?.gender ?? Gender.male.rawValue

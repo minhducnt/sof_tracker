@@ -4,9 +4,14 @@
 import SwiftUI
 
 struct WebScreen: View {
+    // MARK: - Properties
+
     @State private var isLoading = true
     @State private var showError = false
+
     var urlString = "https://shurutech.com/"
+
+    // MARK: - Body
 
     var body: some View {
         VStack {
