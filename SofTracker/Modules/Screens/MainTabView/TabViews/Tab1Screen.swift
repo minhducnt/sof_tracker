@@ -24,13 +24,13 @@ struct Tab1Screen: View {
                             Image(.vectorCurved1)
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
-                                .frame(width: .infinity,
+                                .frame(width: geometry.size.width,
                                        height: geometry.size.height)
                             
                             Image(.vectorCurved3)
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
-                                .frame(width: .infinity,
+                                .frame(width: geometry.size.width,
                                        height: geometry.size.height)
                         }
                     }
@@ -39,7 +39,6 @@ struct Tab1Screen: View {
                     .offset(y: 32)
                     
                     WeatherScreen()
-                        .padding(.horizontal, 24)
                         .frame(maxWidth: .infinity)
                         .background(.white)
                         .clipShape(

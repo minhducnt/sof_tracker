@@ -10,10 +10,6 @@ struct WeatherScreen: View {
     @StateObject var viewModel: WeatherViewModel = .init()
     
     // MARK: - Body
-    
-    init() {
-        getWeatherData()
-    }
 
     var body: some View {
         VStack {
@@ -39,7 +35,7 @@ struct WeatherScreen: View {
                         )
                     }
                 }
-                .padding(.top)
+                .padding(.vertical, 20)
                 .padding(.horizontal, 20)
             }
             .alert(isPresented: Binding<Bool>(
@@ -56,6 +52,7 @@ struct WeatherScreen: View {
         .frame(maxWidth: .infinity)
         .loader(viewModel.isDataLoading)
         .onAppear {
+            getWeatherData()
             AnalyticsManager.logScreenView(screenName: String(describing: Self.self))
         }
     }

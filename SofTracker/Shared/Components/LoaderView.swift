@@ -15,8 +15,7 @@ struct LoaderView: View {
             .background(Color.background)
             .cornerRadius(10)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color.gray.opacity(0.5)
-                .edgesIgnoringSafeArea(.all))
+            //.background(Color.gray.opacity(0.5).edgesIgnoringSafeArea(.all))
         }
     }
 }

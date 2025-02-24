@@ -24,12 +24,12 @@ struct CardView: View {
                 Image(systemName: conditionImage)
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 80, height: 60)
+                    .frame(width: 60, height: 60)
                     .clipShape(Circle())
                     .foregroundColor(conditionColor)
                 Spacer()
             }
-            .padding(.trailing, 4)
+            .padding(.trailing, 16)
 
             VStack(spacing: 20) {
                 Spacer()

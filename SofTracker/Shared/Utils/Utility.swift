@@ -4,6 +4,8 @@
 import Foundation
 import UIKit
 
+// MARK: - Enum
+
 enum Gender: String, CaseIterable, Identifiable {
     case male = "Male"
     case female = "Female"
@@ -11,6 +13,8 @@ enum Gender: String, CaseIterable, Identifiable {
 
     var id: String { self.rawValue }
 }
+
+// MARK: - Language
 
 var userLanguage: String = {
     guard let languageCode = Locale.current.language.languageCode?.identifier,
@@ -21,10 +25,18 @@ var userLanguage: String = {
     return languageName
 }()
 
+func getLocalString(_ key: String) -> String {
+    return NSLocalizedString(key, comment: "")
+}
+
+// MARK: - User
+
 func saveUserDetails(name: String, email: String, dob: Date, gender: Gender, country: String, language: String) {
     let user = User(name: name, email: email, password: KeyChainStorage.shared.getPassword(), dob: formatDate(dob), gender: gender.rawValue, country: country, language: language)
     UserPreferences.shared.saveUser(user: user)
 }
+
+// MARK: - Utility
 
 func removeFocusFromTextField() {
     UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
@@ -47,6 +59,8 @@ func openDeviceSettings() {
     }
     UIApplication.shared.open(url)
 }
+
+// MARK: - Extension
 
 extension Double {
     func formattedAsIntegerOrDecimal() -> String {
@@ -75,8 +89,4 @@ extension String? {
     func isNotNullOrEmpty() -> Bool {
         return !(self == nil || self!.isEmpty)
     }
-}
-
-func getLocalString(_ key: String) -> String {
-    return NSLocalizedString(key, comment: "")
 }

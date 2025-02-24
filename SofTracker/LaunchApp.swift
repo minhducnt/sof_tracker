@@ -1,8 +1,8 @@
 //
 // Created by TMA on 02/20/25.
 //
-import Firebase
 import SwiftUI
+import FirebaseCore
 
 @main
 struct LaunchApp: App {

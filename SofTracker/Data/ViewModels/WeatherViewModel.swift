@@ -13,7 +13,7 @@ class WeatherViewModel: ObservableObject {
     @Published var selectedCardIndex = 0
     @Published var apiError: AppError?
 
-    let cities = ["Delhi", "Jaipur", "Mumbai", "Chennai", "Bengaluru", "Kolkata"]
+    let cities = ["Vietnam", "Delhi", "Jaipur", "Mumbai", "Chennai", "Bengaluru", "Kolkata"]
 
     // MARK: - Functions
 

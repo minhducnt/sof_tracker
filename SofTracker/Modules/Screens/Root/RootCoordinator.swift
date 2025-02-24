@@ -4,6 +4,8 @@
 import SwiftUI
 
 struct RootCoordinator: View {
+    // MARK: - Properties
+
     enum Root {
         case splash
         case authorization
@@ -26,12 +28,15 @@ struct RootCoordinator: View {
                     .onAppear {
                         appStart()
                     }
+                
             case .authorization:
                 AuthorizationScreen()
+                
             case .userDetails:
                 UserDetailsScreen(onCompleted: {
                     rootViewModel.markUserDetailsCompleted()
                 })
+                
             case .mainApp:
                 MainTabCoordinator()
             }
